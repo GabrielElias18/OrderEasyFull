@@ -9,7 +9,8 @@ router.post('/register', authController.register);
 
 // Ruta protegida (requiere autenticación)
 router.get('/dashboard', verifyToken, (req, res) => {
-    res.status(200).json({ message: `Bienvenido al dashboard, ${req.user.username}` });
+    res.status(200).json({ 
+        message: `${req.user.nombre} ${req.user.apellido}, Bienvenido al dashboard` });
 });
 
 module.exports = router;

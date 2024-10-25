@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/userModel');
+const Counter = require('../models/counterModel');
+
 
 // Iniciar sesión
 exports.login = async (req, res) => {
@@ -18,9 +20,24 @@ exports.login = async (req, res) => {
 
 // Registro
 exports.register = async (req, res) => {
-    const { username, password } = req.body;
+    const { username, password, nombre, apellido } = req.body;
     try {
-        const newUser = new User({ username, password });
+        // Obtén el siguiente valor de `usuarioId` incrementando el contador
+        let counter = await Counter.findOneAndUpdate(
+            { name: 'usuarioId' },
+            { $inc: { value: 1 } },
+            { new: true, upsert: true } // Si no existe, crea el contador
+        );
+
+        // Asigna el `usuarioId` desde el valor del contador
+        const newUser = new User({ 
+            usuarioId: counter.value, 
+            username, 
+            password, 
+            nombre, 
+            apellido 
+        });
+        
         await newUser.save();
         res.status(201).json({ message: 'Usuario registrado exitosamente' });
     } catch (error) {
