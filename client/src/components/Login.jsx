@@ -14,7 +14,7 @@ const Login = ({ setToken }) => {
             setToken(data.token); // Suponiendo que tu API devuelve un token
             setMessage('Inicio de sesión exitoso');
         } catch (error) {
-            setMessage('Error en el inicio de sesión');
+            setMessage('Credenciales Incorrectas');
         }
     };
 
