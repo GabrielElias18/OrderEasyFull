@@ -14,7 +14,7 @@ const verificarToken = (req, res, next) => {
             return res.status(401).json({ mensaje: 'Token no válido' });
         }
         // Asigna `usuarioId` y `username` a `req.user` para acceso en rutas protegidas
-        req.user = { usuarioId: decoded.usuarioId, username: decoded.username };
+        req.user = { usuarioId: decoded.usuarioId, username: decoded.username, nombre: decoded.nombre, apellido: decoded.apellido };
         next();
     });
 };

@@ -15,7 +15,12 @@ exports.login = async (req, res) => {
 
         // Incluye `usuarioId` y `username` en el token
         const token = jwt.sign(
-            { usuarioId: user.usuarioId, username: user.username },
+            { 
+            usuarioId: user.usuarioId, 
+            username: user.username,
+            nombre: user.nombre,
+            apellido: user.apellido
+            },
             process.env.SECRET_KEY,
             { expiresIn: '1h' }
         );
