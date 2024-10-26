@@ -21,6 +21,9 @@ mongoose.connect(process.env.MONGO_URI)
 const authRoutes = require('./routes/authRoutes');
 app.use('/api', authRoutes);
 
+const categoryRoutes = require('./routes/categoryRoutes');
+app.use('/api', categoryRoutes);
+
 // Iniciar el servidor
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
